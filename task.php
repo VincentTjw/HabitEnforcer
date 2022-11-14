@@ -5,25 +5,31 @@
         <meta charset="utf-8" />
     </head>
     <body>
-    <div class="createTask">
-    <form action="task.php" method="post">
+        <div id="task-form">
+  <h2 class="header">Crée une nouvelle tâche </h2>
+  <div>
+  <form action="task.php" method="post">
         <p>Tâche à ajouter: <input type="text" name="tache" /></p>
-<select name="difficultyTask" id="difficultyTask">
-    <option value="">--Difficulté--</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
+    <label>
+<p> Difficulté: <select name="difficultyTask" id="difficultyTask"></p>
+    <option value=""></option>
+    <option value="1">1 (Facile)</option>
+    <option value="2">2 (Moyen)</option>
+    <option value="3">3 (Difficile)</option>
 </select>
-<p> Couleur: </p>
-<input type="color" id="color" name="colorTask" value="#ff0000">
-<select name="periodicityTask" id="periodicityTask">
-    <option value="">--Périodicité--</option>
+</label>
+<label>
+<p>Périodicité: <select name="periodicityTask" id="periodicityTask"></p>
+    <option value=""></option>
     <option value="Journalière">Journalière</option>
     <option value="Hebdomadaire">Hebdomadaire</option>
 </select>
-        <input type="submit" value="Ajouter">
-        </form>
-        </div>
+</label>
+<p> Couleur: <input type="color" id="colorTask" name="colorTask" value="#E564E7"> </p>
+      <button type="submit">Créer</button>
+    </form>
+  </div>
+</div>
 <?php
 class Task
 {
@@ -44,8 +50,8 @@ class Task
     $user = 'Esteban';
     $pass = 'Ynov';
     $dsn = "mysql:host=$host;dbname=$db";
-         if($this->content == "" ||  $this->difficulty == "" && $this->color == "" || $this->periodicity == "" ){
-        echo ("Please complete every field ");
+         if($this->content == "" ||  $this->difficulty == "" || $this->color == "" || $this->periodicity == "" ){
+            echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
     try {
      $pdo = new \PDO($dsn, $user, $pass);
