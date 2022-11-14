@@ -17,16 +17,18 @@ try{
 
 $pdo = new PDO("mysql:host=localhost;dbname=habitenforcer", "VincentYnov", "Ynov");
 
-$searchID = $pdo -> prepare('SELECT ID from `group` where `Name`=:name ');
-$searchID = $searchID ->execute(array(
+$req = $pdo -> prepare('SELECT ID from `group` where `Name`= :name ');
+$req ->execute(array(
     'name'=>$name
-)); 
-echo $searchID;
-if ($searchID =! NULL){
+));
+$searchID = $req->fetch(); 
+        
+if ($searchID != NULL){
 
 $request = $pdo -> prepare('UPDATE `user` set ID_Group=:searchID where Email =:Mail');
+
 $request->execute(array(
-    'searchID' => $searchID,
+    'searchID' => $searchID['ID'],
     'Mail' => $mail
 ));
 }
