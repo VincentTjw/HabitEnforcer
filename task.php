@@ -10,17 +10,12 @@
         <p>Tâche à ajouter: <input type="text" name="tache" /></p>
 <select name="difficultyTask" id="difficultyTask">
     <option value="">--Difficulté--</option>
-    <option value="Faible">Faible</option>
-    <option value="Moyen">Moyen</option>
-    <option value="Fort">Fort</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
 </select>
-<select name="colorTask" id="colorTask">
-    <option value="">--Couleur--</option>
-    <option value="Bleue">Bleue</option>
-    <option value="Rouge">Rouge</option>
-    <option value="Vert">Vert</option>
-    <option value="Violet">Violet</option>
-</select>
+<p> Couleur: </p>
+<input type="color" id="color" name="colorTask" value="#ff0000">
 <select name="periodicityTask" id="periodicityTask">
     <option value="">--Périodicité--</option>
     <option value="Journalière">Journalière</option>
@@ -36,8 +31,7 @@ class Task
     public $difficulty;
     public $color;
     public $periodicity;
-    
-   
+
     function __construct($content,$difficulty,$color,$periodicity) {
         $this->content = $content;
         $this->difficulty = $difficulty;
@@ -45,8 +39,28 @@ class Task
         $this->periodicity = $periodicity;
     }
     public function createTask() {
-        echo '<div class="task">'.$this->content, $this->difficulty, $this->color, $this->periodicity.'</div>';
+    $host = 'localhost';
+    $db   = 'habitenforcer';
+    $user = 'Esteban';
+    $pass = 'Ynov';
+    $dsn = "mysql:host=$host;dbname=$db";
+         if($this->content == "" ||  $this->difficulty == "" && $this->color == "" || $this->periodicity == "" ){
+        echo ("Please complete every field ");
+        }else{
+    try {
+     $pdo = new \PDO($dsn, $user, $pass);
+     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity) VALUES (:name,:difficulties,:color,:periodicity)');
+    $request->execute(array(
+    'name' => $this->content,
+    'difficulties' => $this->difficulty,
+    'color' => $this->color,
+    'periodicity' => $this->periodicity,
+    ));
+    } catch (\PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
     }
+    }
+}
 }
 $newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"]);
 $newTask->createTask();
