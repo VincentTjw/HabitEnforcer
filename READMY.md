@@ -1,0 +1,123 @@
+<div id="top"></div>
+
+<!-- HabitEnforcer  -->
+## HabitEnforcer 
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+The goal of this project is to propose a simple forum where users can create account (stored in a database) and login .
+Once it's done , be able to post what they want and relate the post to categories but also like and dislike other topics !
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+### Built With
+* [PHP](https://www.php.net/)
+* [MAMP](https://www.mamp.info/en/downloads/)
+* [SQL](https://sql.sh/)
+* [HTML5](https://html.spec.whatwg.org/multipage/)
+* [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+You need to install PHP and MAMP :
+<br>
+https://www.php.net/manual/fr/install.php
+https://www.mamp.info/en/downloads/
+
+### Installation
+
+1. Clone the repo
+   ```
+   https://github.com/VincentTjw/HabitEnforcer
+   ```
+2. 
+   ```
+   
+   ```
+3. 
+   ```
+   
+   ```
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] DataBase
+- [x] Authentication
+- [x] Task Creation 
+- [x] Group 
+- [x] Full Responsive Website
+- [ ] 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See [LICENSE.txt]() for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+CARDOSO Esteban - [esteban.cardoso@ynov.com] <br>
+Chevalier Maxime - [maxime.chevalier@ynov.com] <br>
+TERENTJEW Vincent - [vincent.terentjew@ynov.com] <br>
+
+
+
+Project Link: [https://github.com/VincentTjw/HabitEnforcer](https://github.com/VincentTjw/HabitEnforcer)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+* [JS Docs](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+* [Sqlite](https://www.sqlite.org/index.html)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
