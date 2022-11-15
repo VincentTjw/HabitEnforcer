@@ -20,11 +20,25 @@ if (!empty($_POST['register'])) {
 </head>
 
 <body>
-    <div class="pyro">
-        <div class="before"></div>
-        <div class="after"></div>
+    <div id="fond">
+        <div class="pyro">
+            <div class="before"></div>
+            <div class="after"></div>
+        </div>
+        <div class="gOvale" id="ovale1"></div>
+        <div class="gOvale" id="ovale3"></div>
+        <div class="gOvale" id="ovale2"></div>
+        <div class="gOvale" id="ovale4"></div>
+        <div class="gOvale" id="ovale5"></div>
     </div>
+    
     <div class="contant">
+        <div class="titre">
+            <img src="./img/Kittytude logo.png">
+            <h1>Kittytude</h1>
+            <img src="./img/Kittytude logo.png">
+        </div>
+        
         <div class="center">
             <div class="changeType">
                 <form id="typeform" method="post">

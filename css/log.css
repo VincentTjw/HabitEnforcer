@@ -4,10 +4,11 @@
     align-items: center;
     height: 100vh;
     margin: 0 0 0 0;
+    flex-direction: column;
 }
 
 .center {
-    background: radial-gradient(#fca4ff , #d100d8);
+    background: radial-gradient(#a020c0 , #43008f);
     min-width: 50vw;
     /* min-height: 50vh; */
     border-radius: 5vh;
@@ -83,19 +84,146 @@
 .err {
     color: red;
 }
+.titre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.titre h1{
+  font-size: 10vh;
+  color: azure;
+  text-shadow: 0 0 15px rgba(255,255,255,.5), 0 0 10px rgba(255,255,255,.5);
+}
+.titre img{
+  width: 75px;
+  height: 102px;
+  margin-top: -20px;
+}
 
 
+/* font */
 
+.gOvale {
+  position: fixed;
+  z-index: -1;
+}
 
+#ovale1 {
+  width: 600px;
+  height: 400px;
+  -webkit-border-radius: 300px / 200px;
+  -moz-border-radius:    300px / 200px; 
+  border-radius:         300px / 200px;
+  margin-top: 85vh;
+  margin-left: -10vw;
+  background:#00162c;
+}
 
+#ovale2 {
+  width: 800px;
+  height: 500px;
+  -webkit-border-radius: 400px / 250px;
+  -moz-border-radius:    400px / 250px; 
+  border-radius:         400px / 250px;
+  margin-top: 80vh;
+  margin-left: 20vw;
+  background:#001429;
+}
 
+#ovale3 {
+  width: 500px;
+  height: 200px;
+  -webkit-border-radius: 250px / 100px;
+  -moz-border-radius:    250px / 100px; 
+  border-radius:         250px / 100px;
+  margin-top: 85vh;
+  margin-left: 55vw;
+  background:#00172c;
+}
+#ovale4 {
+  width: 800px;
+  height: 400px;
+  -webkit-border-radius: 400px / 200px;
+  -moz-border-radius:    400px / 200px; 
+  border-radius:         400px / 200px;
+  margin-top: 85vh;
+  margin-left: 65vw;
+  background:#000f1d;
+}
+#ovale5 {
+  width: 800px;
+  height: 400px;
+  -webkit-border-radius: 400px / 200px;
+  -moz-border-radius:    400px / 200px; 
+  border-radius:         400px / 200px;
+  margin-top: 90vh;
+  margin-left: 0vw;
+  background:#001122;
+}
+
+/* étoile */
+
+:root{
+  --star: rgba(255,255,255,0.7);
+}
+
+body{
+  min-height: 100vh;
+  background-image:  
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%), 
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%), 
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%);
+  background-size: 4px 4px, 3px 3px, 5px 5px, 3px 3px, 6px 6px, 4px 4px, 5px 5px, 4px 4px, 6px 6px, 3px 3px, 5px 5px, 4px 4px, 3px 3px, 6px 6px, 5px 5px, 4px 4px, 5px 5px, 6px 6px;
+  background-position: 20% 10%, 5% 20%, 10% 75%, 22% 35%, 30% 30%, 40% 50%, 45% 20%, 65% 20%, 85% 30%, 98% 90%, 20% 80%, 50% 80%, 75% 80%, 89% 75%, 90% 95%, 60% 70%, 65% 40%, 90% 20% ;
+  background-repeat: no-repeat;
+  animation: twinkle ease-in 0.3s infinite;
+}
+
+@keyframes twinkle{
+  to{
+  background-image:  
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%), 
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%), 
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, var(--star) 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%),
+  radial-gradient(circle, #fff 20%, transparent 30%); 
+  }
+}
 
 /* aniamtion font */
 
 body {
     margin: 0;
     padding: 0;
-    background: #001d3a;
+    background-color: #001d3a;
     overflow: hidden;
   }
   
