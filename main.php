@@ -3,6 +3,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="main.css" /> 
         <meta charset="utf-8" />
+        <form action="main.php" method="post">
     <?php
 class displayData {
     public function displayTask(){
@@ -16,9 +17,9 @@ class displayData {
             $data = $pdo->query("SELECT * FROM task")->fetchAll();
             foreach ($data as $row) {
                 if ($row['Periodicity'] == "Hebdomadaire" && $row['complete'] != 1){
-                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
+                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<button type="submit" name="check'.$row['ID'].'" value=1 />Validé la tâche','</div>';
                 }else{
-                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
+                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity']. '<br>','<button type="submit" name="check'.$row['ID'].'" value=1 />Validé la tâche','</div>';
                 }
             }
               }catch (\PDOException $e) {
@@ -51,5 +52,6 @@ class displayData {
 $displayInfo = new displayData();
 $displayInfo->displayTask();
     ?>
+    </form>
     </body>
     </html>
