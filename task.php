@@ -13,9 +13,9 @@
     <label>
 <p> Difficulté: <select name="difficultyTask" id="difficultyTask"></p>
     <option value=""></option>
-    <option value="1">1 (Facile)</option>
-    <option value="2">2 (Moyen)</option>
-    <option value="3">3 (Difficile)</option>
+    <option value="1">Kitty (Facile)</option>
+    <option value="2">Kat (Moyen)</option>
+    <option value="3">Kitue (Difficile)</option>
 </select>
 </label>
 <label>
@@ -56,7 +56,8 @@ class Task
             echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
     try {
-     $pdo = new \PDO($dsn, $user, $pass);
+        require 'Config.php';
+     $pdo = new PDO(Config::$url, Config::$user, Config::$password);
      $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
     $request->execute(array(
     'name' => $this->content,

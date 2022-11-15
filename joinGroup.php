@@ -14,8 +14,8 @@ $mdp = $_POST["Mdp"];
 try{
 
 
-
-$pdo = new PDO("mysql:host=localhost;dbname=habitenforcer", "VincentYnov", "Ynov");
+    require 'Config.php';
+$pdo = new PDO(Config::$url, Config::$user, Config::$password);
 
 $req = $pdo -> prepare('SELECT ID from `group` where `Name`= :name ');
 $req ->execute(array(
