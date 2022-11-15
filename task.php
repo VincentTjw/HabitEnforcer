@@ -47,16 +47,13 @@ class Task
         $this->complete = $complete;
     }
     public function createTask() {
-    $host = 'localhost';
-    $db   = 'habitenforcer';
-    $user = 'Esteban';
-    $pass = 'Ynov';
-    $dsn = "mysql:host=$host;dbname=$db";
+
          if($this->content == "" ||  $this->difficulty == "" || $this->color == "" || $this->periodicity == "" ){
             echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
     try {
-     $pdo = new \PDO($dsn, $user, $pass);
+        require 'Config.php';
+     $pdo = new \PDO(Config::$url, Config::$user, Config::$password);
      $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
     $request->execute(array(
     'name' => $this->content,

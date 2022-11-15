@@ -45,10 +45,6 @@ body{
     float : right;
 }
 
-.create-group{
-    
-}
-
 @media screen and (max-width: 765px) {
     .cardLeft {
         margin-top: calc(5rem + 325px);

@@ -5,8 +5,8 @@ $name = $_POST["Name"];
 $mdp = $_POST["mdp"];
 $mdpverif = $_POST["mdpverif"];
 try{
-    
-    $pdo = new PDO("mysql:host=localhost;dbname=habitenforcer", "VincentYnov", "Ynov");
+    require 'Config.php';
+    $pdo = new PDO(Config::$url, Config::$user, Config::$password);
     
 if ($name != NULL){
     $verify = $pdo -> prepare("SELECT * FROM `group` WHERE `Name` = ?");
@@ -40,5 +40,5 @@ catch (PDOException $e){
 
 }
 
-
+header('Location: ./main.php');
 ?>
