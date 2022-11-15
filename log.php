@@ -34,9 +34,9 @@ if (!empty($_POST['register'])) {
     
     <div class="contant">
         <div class="titre">
-            <img src="./img/Kittytude logo.png">
+            <img src="./img/Kittytude_logo.png">
             <h1>Kittytude</h1>
-            <img src="./img/Kittytude logo.png">
+            <img src="./img/Kittytude_logo.png">
         </div>
         
         <div class="center">

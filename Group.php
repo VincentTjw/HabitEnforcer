@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupe</title>
-    <link rel="stylesheet" href="group.css">
+    <link rel="stylesheet" href="./css/group.css">
 </head>
 <body>
     
 <div class = "container">
     <div class = 'cardMain'>
-        <img src="Kittytude_logo.png" alt="KittyLogo"> 
+        <img src="./img/Kittytude_logo.png" alt="KittyLogo"> 
     </div>
     <div class = 'cardLeft'>
     <h1>Créer un groupe !</h1>
