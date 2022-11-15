@@ -1,0 +1,22 @@
+.task-hebdo{
+    background-color: rgb(194, 6, 6);
+    height: 120px;
+    width: 120px;
+    margin-bottom: 1%;
+    }
+.task-dayli{
+    background-color: rgb(15, 6, 194);
+    height: 120px;
+    width: 120px;
+    margin-bottom: 1%;
+    }
+.task-color{
+    border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50%;
+}
