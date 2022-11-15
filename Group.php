@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Groupe</title>
+    <link rel="stylesheet" href="group.css">
 </head>
 <body>
     
 <div class = "container">
+    <div class = 'cardMain'>
+        <img src="Kittytude_logo.png" alt="KittyLogo"> 
+    </div>
+    <div class = 'cardLeft'>
     <h1>Créer un groupe !</h1>
     <form action="insertGroup.php" method= "post">
         <div class = 'create-group'>
@@ -21,7 +26,8 @@
         </div>
         <input type="submit" value='OK'>
     </form>
-
+    </div>
+    <div class = 'cardRight'>
     <h1>Rejoindre un groupe !</h1>
     <form action="joinGroup.php" method="post">
     <div class = 'join-group'>
@@ -34,6 +40,9 @@
     </div>
     <input type="submit" value ='OK'>
     </form>
+    </div>
+   
+
 
 </div>
 </body>
