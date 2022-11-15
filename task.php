@@ -13,9 +13,9 @@
     <label>
 <p> Difficulté: <select name="difficultyTask" id="difficultyTask"></p>
     <option value=""></option>
-    <option value="1">1 (Facile)</option>
-    <option value="2">2 (Moyen)</option>
-    <option value="3">3 (Difficile)</option>
+    <option value="1">Kitty (Facile)</option>
+    <option value="2">Kat (Moyen)</option>
+    <option value="3">Kitue (Difficile)</option>
 </select>
 </label>
 <label>
@@ -53,7 +53,7 @@ class Task
         }else{
     try {
         require 'Config.php';
-     $pdo = new \PDO(Config::$url, Config::$user, Config::$password);
+     $pdo = new PDO(Config::$url, Config::$user, Config::$password);
      $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
     $request->execute(array(
     'name' => $this->content,

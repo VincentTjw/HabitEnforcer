@@ -24,12 +24,12 @@ $req ->execute(array(
 $searchID = $req->fetch(); 
         
 if ($searchID != NULL){
-
-$request = $pdo -> prepare('UPDATE `user` set ID_Group=:searchID where Email =:Mail');
+session_start();
+$request = $pdo -> prepare('UPDATE `user` set ID_Group=:searchID where ID =:ID');
 
 $request->execute(array(
     'searchID' => $searchID['ID'],
-    'Mail' => $mail
+    'ID' => $_SESSION['ID']
 ));
 }
 }
