@@ -1,0 +1,65 @@
+body{
+    background-color: black;
+    color: rgb(144, 22, 22);
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
+.cardMain{
+
+    width: 250px;
+    height: 125px;
+   
+    margin: 0 auto 1rem;
+
+
+
+}
+.cardLeft {
+    margin-top: 5rem;
+    max-width: 250px;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: black;
+    border-radius: 1rem;
+    float : left;
+  
+}
+
+.cardRight{
+    margin-top: 5rem;
+    max-width: 250px;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: black;
+    border-radius: 1rem;
+    float : right;
+}
+
+.create-group{
+    
+}
+
+@media screen and (max-width: 765px) {
+    .cardLeft {
+        margin-top: calc(5rem + 325px);
+    }
+    .cardRight {
+        margin-top: calc(5rem + 325px);
+    }
+}
+
+@media screen and (max-width: 579px) {
+    .cardRight {
+        margin-top: 5rem;
+    }
+}

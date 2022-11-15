@@ -1,7 +1,7 @@
 <html>
     <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="main.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/main.css" /> 
         <meta charset="utf-8" />
         <form action="main.php" method="post">
     <?php
@@ -13,7 +13,8 @@ class displayData {
         $pass = 'Ynov';
         $dsn = "mysql:host=$host;dbname=$db";
         try {
-            $pdo = new \PDO($dsn, $user, $pass);
+            require 'Config.php';
+            $pdo = new PDO(Config::$url, Config::$user, Config::$password);
             $data = $pdo->query("SELECT * FROM task")->fetchAll();
             foreach ($data as $row) {
                 if ($row['Periodicity'] == "Hebdomadaire" && $row['complete'] != 1){
