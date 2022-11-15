@@ -3,8 +3,9 @@
 
 $name = $_POST["Name"];
 $mdp = $_POST["mdp"];
+$mdpverif = $_POST["mdpverif"];
 try{
-
+    
     $pdo = new PDO("mysql:host=localhost;dbname=habitenforcer", "VincentYnov", "Ynov");
     
 if ($name != NULL){
@@ -19,14 +20,21 @@ if ($name != NULL){
         <?php
     }
 else {
-$request = $pdo -> prepare('INSERT INTO `group` (Name,mdp) VALUES (:name,:mdp)');
+    if($mdp == $mdpverif){ 
 
-$request->execute(array(
-    'name' => $name,
-    'mdp' => $mdp
+    $request = $pdo -> prepare('INSERT INTO `group` (Name,mdp) VALUES (:name,:mdp)');
+
+    $request->execute(array(
+     'name' => $name,
+     'mdp' => $mdp
 ));
-}   
-}}
+    }
+    else{
+        echo 'Les mots de passe ne correspondent pas';
+
+    }
+}   }
+}
 catch (PDOException $e){
     echo "Erreur :" . $e->getMessage();
 

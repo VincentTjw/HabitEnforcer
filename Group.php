@@ -13,9 +13,11 @@
     <form action="insertGroup.php" method= "post">
         <div class = 'create-group'>
             <label for="Name">Name</label><br>
-            <input type="text" name ='Name'><br>
+            <input type="text" name ='Name' required><br>
             <label for="mdp"> Quel mot de passe voulez vous donner?</label><br>
-            <input type="text" name = 'mdp'>
+            <input type="password" name = 'mdp' required> <br>
+            <label for="mdpVerify">Confirmer le mot de passe</label> <br>
+            <input type="password" name = 'mdpverif' required>
         </div>
         <input type="submit" value='OK'>
     </form>
@@ -27,8 +29,8 @@
         <input type="email" name = 'Mail'><br>
         <label for="Name">Quel est le nom du groupe que vous voulez rejoindre ?<br></label>
         <input type="text" name ='Name'><br>
-        <label for="text" name='Mdp'>Quel est le code ?</label><br>
-        <input type="text" name ='Mdp'>
+        <label for="text" name='Mdp'>Quel est le mot de passe ?</label><br>
+        <input type="password" name ='Mdp'>
     </div>
     <input type="submit" value ='OK'>
     </form>
