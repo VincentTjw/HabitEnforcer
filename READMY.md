@@ -116,7 +116,7 @@ Project Link: [https://github.com/VincentTjw/HabitEnforcer](https://github.com/V
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-* [JS Docs](https://developer.mozilla.org/fr/docs/Web/JavaScript)
-* [Sqlite](https://www.sqlite.org/index.html)
+* []()
+* []()
 
 <p align="right">(<a href="#top">back to top</a>)</p>
