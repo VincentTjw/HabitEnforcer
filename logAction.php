@@ -26,6 +26,7 @@ function getUser($email,$dbd)
         try {
             if (!empty($_POST['type'])) {
                 require 'Config.php';
+                session_start();
                 $dbd = new PDO(Config::$url, Config::$user, Config::$password);
                 switch ($_POST['type']) {
                     case 'login':
@@ -50,10 +51,13 @@ function getUser($email,$dbd)
                         }
                         break;
                     case 'signup':
-                        if (!(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']))) {
+                        if (!(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['confPassword']))) {
                             $user = getUser($_POST['email'],$dbd);
                             if ($user) {
                                 header('Location: log.php?RegisterMessage=Email already used');
+                                exit;
+                            } else if ($_POST['password'] != $_POST['confPassword']) {
+                                header('Location: log.php?RegisterMessage=Passwords are not the same');
                                 exit;
                             } else {
                                 $password = password_hash($_POST['password'], null);
