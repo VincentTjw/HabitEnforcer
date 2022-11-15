@@ -43,6 +43,19 @@
                 <input type="submit" value='OK'>
             </form>
         </div>
+        <div class='cardRight'>
+            <h1>Inviter un membre !</h1>
+            <form action="invit.php" method="post">
+                <div class='invit-group'>
+                    <label for="Mail">Qui souhaitez vous inviter ?<br> (Ecrivez un ID) <br> </label>
+
+                    <input type="text" name='Invit'><br>
+                  
+                </div>
+                <input type="submit" value='OK'>
+            </form>
+        </div>
+        
 
 
 
