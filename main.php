@@ -1,3 +1,19 @@
+<?php
+    require 'Config.php';
+    session_start();
+    if (empty($_SESSION['ID'])) {
+        header('Location: log.php');
+        exit;
+    }else{
+        $pdo = new PDO(Config::$url, Config::$user, Config::$password);
+        $data = $pdo->query('SELECT ID_Group FROM user WHERE ID = ' . $_SESSION['ID'])->fetchAll();
+        if (!$data[0]['ID_Group']) {
+            header('Location: Group.php');
+            exit;
+        }
+    }
+?>
+
 <html>
 
 <head>
@@ -15,7 +31,6 @@
             $pass = 'Ynov';
             $dsn = "mysql:host=$host;dbname=$db";
             try {
-                require 'Config.php';
                 $pdo = new PDO(Config::$url, Config::$user, Config::$password);
                 echo "<div class=\"contant\"><div class=\"taskGroupe jour\"><h1>Journalière</h1>";
                 $data = $pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière'")->fetchAll();

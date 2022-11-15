@@ -34,8 +34,8 @@ function getUser($email,$dbd)
                             $user = getUser($_POST['email'],$dbd);
                             if ($user) {
                                 if (password_verify($_POST['password'], $user['Password'])) {
-                                    $_SESSION['email'] = $user['email'];
-                                    header('Location: index.php');
+                                    $_SESSION['ID'] = $user['ID'];
+                                    header('Location: main.php');
                                     exit;
                                 } else {
                                     header('Location: log.php?LogMessage=Wrong password');
@@ -67,8 +67,9 @@ function getUser($email,$dbd)
                                     'email' => $_POST['email'],
                                     'password' => $password
                                 ));
-                                $_SESSION['email'] = $_POST['email'];
-                                header('Location: index.php');
+                                $user = getUser($_POST['email'],$dbd);
+                                $_SESSION['ID'] = $user['ID'];
+                                header('Location: main.php');
                                 exit;
                             }
                         } else {

@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (empty($_SESSION['ID'])) {
+        header('Location: log.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,8 +41,6 @@
             <h1>Rejoindre un groupe !</h1>
             <form action="joinGroup.php" method="post">
                 <div class='join-group'>
-                    <label for="Mail">Quel est votre adresse mail ? <br></label>
-                    <input type="email" name='Mail'><br>
                     <label for="Name">Quel est le nom du groupe que vous voulez rejoindre ?<br></label>
                     <input type="text" name='Name'><br>
                     <label for="text" name='Mdp'>Quel est le mot de passe ?</label><br>
