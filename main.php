@@ -16,9 +16,9 @@ class displayData {
             $data = $pdo->query("SELECT * FROM task")->fetchAll();
             foreach ($data as $row) {
                 if ($row['Periodicity'] == "Hebdomadaire" && $row['complete'] != 1){
-                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
+                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
                 }else{
-                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity'].'</div>';
+                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
                 }
             }
               }catch (\PDOException $e) {
@@ -26,7 +26,7 @@ class displayData {
            }
            }
 }
-class checkTask{
+/*class checkTask{
     function __construct($complete) {
         $this->complete = $complete;
     }
@@ -46,7 +46,8 @@ class checkTask{
                echo "Connection failed: " . $e->getMessage();
            }
     }
-}
+}*/
+//$checkTask = new checkTask($_POST[""])
 $displayInfo = new displayData();
 $displayInfo->displayTask();
     ?>
