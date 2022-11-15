@@ -49,15 +49,17 @@ body{
     
 }
 
-@media screen and (max-width: 768px) {
-    .cardMain{
+@media screen and (max-width: 765px) {
+    .cardLeft {
+        margin-top: calc(5rem + 325px);
+    }
+    .cardRight {
+        margin-top: calc(5rem + 325px);
+    }
+}
 
-        width: 250px;
-        height: 125px;
-       
-        margin: 0 auto 1rem;
-    
-    
-    
+@media screen and (max-width: 579px) {
+    .cardRight {
+        margin-top: 5rem;
     }
 }
