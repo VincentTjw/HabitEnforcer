@@ -1,7 +1,7 @@
 <html>
     <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="task.css" /> 
+    <link rel="stylesheet" type="text/css" href="main.css" /> 
         <meta charset="utf-8" />
     <?php
 class displayData {
@@ -15,12 +15,37 @@ class displayData {
             $pdo = new \PDO($dsn, $user, $pass);
             $data = $pdo->query("SELECT * FROM task")->fetchAll();
             foreach ($data as $row) {
-                echo '<div class="task">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', $row['Color']. '<br>', $row['Periodicity'].'</div>';
+                if ($row['Periodicity'] == "Hebdomadaire" && $row['complete'] != 1){
+                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
+                }else{
+                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity'].'</div>';
+                }
             }
               }catch (\PDOException $e) {
                echo "Connection failed: " . $e->getMessage();
            }
            }
+}
+class checkTask{
+    function __construct($complete) {
+        $this->complete = $complete;
+    }
+    public function checkTask(){
+        $host = 'localhost';
+        $db   = 'habitenforcer';
+        $user = 'Esteban';
+        $pass = 'Ynov';
+        $dsn = "mysql:host=$host;dbname=$db";
+        try {
+            $pdo = new \PDO($dsn, $user, $pass);
+            $request = $pdo -> prepare('INSERT INTO `task` (complete) VALUES (:complete)');
+           $request->execute(array(
+           'complete' => $this->complete,
+           ));
+           } catch (\PDOException $e) {
+               echo "Connection failed: " . $e->getMessage();
+           }
+    }
 }
 $displayInfo = new displayData();
 $displayInfo->displayTask();
