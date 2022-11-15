@@ -37,12 +37,14 @@ class Task
     public $difficulty;
     public $color;
     public $periodicity;
+    public $complete;
 
-    function __construct($content,$difficulty,$color,$periodicity) {
+    function __construct($content,$difficulty,$color,$periodicity,$complete) {
         $this->content = $content;
         $this->difficulty = $difficulty;
         $this->color = $color;
         $this->periodicity = $periodicity;
+        $this->complete = $complete;
     }
     public function createTask() {
     $host = 'localhost';
@@ -55,20 +57,22 @@ class Task
         }else{
     try {
      $pdo = new \PDO($dsn, $user, $pass);
-     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity) VALUES (:name,:difficulties,:color,:periodicity)');
+     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
     $request->execute(array(
     'name' => $this->content,
     'difficulties' => $this->difficulty,
     'color' => $this->color,
     'periodicity' => $this->periodicity,
+    'complete' => $this->complete,
     ));
+    echo '<div class="error-task">' ,'<p>Votre tâche à été ajouté !<p/>' ,'</div>';
     } catch (\PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }
     }
 }
 }
-$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"]);
+$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"],0);
 $newTask->createTask();
 ?>
 </body>
