@@ -31,8 +31,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-The goal of this project is to propose a simple forum where users can create account (stored in a database) and login .
-Once it's done , be able to post what they want and relate the post to categories but also like and dislike other topics !
+
 
 
 
