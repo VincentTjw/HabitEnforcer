@@ -1,7 +1,7 @@
 <html>
     <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="main.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/main.css" /> 
         <meta charset="utf-8" />
     <?php
 class displayData {
