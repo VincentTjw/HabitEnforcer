@@ -1,22 +1,36 @@
-.task-hebdo{
-    background-color: rgb(194, 6, 6);
-    height: 120px;
-    width: 120px;
-    margin-bottom: 1%;
-    }
-.task-dayli{
-    background-color: rgb(15, 6, 194);
-    height: 120px;
-    width: 120px;
-    margin-bottom: 1%;
-    }
-.task-color{
-    border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 50%;
+.task{
+    background-color: #ffffff;
+    border: 3px solid #e3e3e3;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    padding: 3px;
+    width: 20rem;
+}
+.taskName{
+    align-items: center;
+    text-align: center;
+}
+.taskDifficulty{
+    align-items: right;
+    text-align: right;
+}
+
+.taskGroupe{
+    display: flex;
+    flex-direction: column;
+    width: 22rem;
+    background-color: #e3e3e3;
+    border-radius: 1rem;
+    margin: 15px;
+    align-items: center;
+}
+
+.contant{
+    display: flex;
+    flex-direction: row;
+}
+
+h1 {
+    text-align: center;
 }

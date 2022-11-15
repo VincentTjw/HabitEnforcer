@@ -1,33 +1,65 @@
 <html>
-    <head>
+
+<head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="./css/main.css" /> 
-        <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+    <meta charset="utf-8" />
     <?php
-class displayData {
-    public function displayTask(){
-        $host = 'localhost';
-        $db   = 'habitenforcer';
-        $user = 'Esteban';
-        $pass = 'Ynov';
-        $dsn = "mysql:host=$host;dbname=$db";
-        try {
-            require 'Config.php';
-            $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-            $data = $pdo->query("SELECT * FROM task")->fetchAll();
-            foreach ($data as $row) {
-                if ($row['Periodicity'] == "Hebdomadaire" && $row['complete'] != 1){
-                echo '<div class="task-hebdo">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>', '<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
-                }else{
-                echo '<div class="task-dayli">'.$row['Name'].'<br>', $row['Difficulties']. '<br>', '<div class="task-color" style="background-color:'.$row['Color'].';">',  '</div>','<br>', $row['Periodicity']. '<br>','<input type="hidden" name="check'.$row['ID'].'" value="0" />Validé <input type="checkbox" name="check'.$row['ID'].'; value=1 "/>','</div>';
+    class displayData
+    {
+        public function displayTask()
+        {
+            $host = 'localhost';
+            $db   = 'habitenforcer';
+            $user = 'Esteban';
+            $pass = 'Ynov';
+            $dsn = "mysql:host=$host;dbname=$db";
+            try {
+                require 'Config.php';
+                $pdo = new PDO(Config::$url, Config::$user, Config::$password);
+                echo "<div class=\"contant\"><div class=\"taskGroupe jour\"><h1>Journalière</h1>";
+                $data = $pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière'")->fetchAll();
+                foreach ($data as $row) {
+                    echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
+                    echo "<p class=\"taskName\" >$row[Name]</p>";
+                    switch ($row["Difficulties"]) {
+                        case 1:
+                            echo "<p class=\"taskDifficulty\" >Kitty</p>";
+                            break;
+                        case 2:
+                            echo "<p class=\"taskDifficulty\" >Kat</p>";
+                            break;
+                        case 3:
+                            echo "<p class=\"taskDifficulty\" >Kitue</p>";
+                            break;
+                    }
+                    echo "</div>";
                 }
+                echo "</div><div class=\"taskGroupe hebdo\"><h1>Hebdomadaire</h1>";
+                $data = $pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Hebdomadaire'")->fetchAll();
+                foreach ($data as $row) {
+                    echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
+                    echo "<p class=\"taskName\" >$row[Name]</p>";
+                    switch ($row["Difficulties"]) {
+                        case 1:
+                            echo "<p class=\"taskDifficulty\" >Kitty</p>";
+                            break;
+                        case 2:
+                            echo "<p class=\"taskDifficulty\" >Kat</p>";
+                            break;
+                        case 3:
+                            echo "<p class=\"taskDifficulty\" >Kitue</p>";
+                            break;
+                    }
+                    echo "</div>";
+                }
+                echo "</div></div>";
+            } catch (\PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
             }
-              }catch (\PDOException $e) {
-               echo "Connection failed: " . $e->getMessage();
-           }
-           }
-}
-/*class checkTask{
+        }
+    }
+    /*class checkTask{
     function __construct($complete) {
         $this->complete = $complete;
     }
@@ -48,9 +80,10 @@ class displayData {
            }
     }
 }*/
-//$checkTask = new checkTask($_POST[""])
-$displayInfo = new displayData();
-$displayInfo->displayTask();
+    //$checkTask = new checkTask($_POST[""])
+    $displayInfo = new displayData();
+    $displayInfo->displayTask();
     ?>
     </body>
-    </html>
+
+</html>
