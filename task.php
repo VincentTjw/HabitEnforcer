@@ -31,6 +31,7 @@
   </div>
 </div>
 <?php
+session_start();
 class Task
 {
     public $content;
@@ -58,15 +59,17 @@ class Task
     try {
         require 'Config.php';
      $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
+     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete,ID_User) VALUES (:name,:difficulties,:color,:periodicity,:complete,:ID_User)');
     $request->execute(array(
     'name' => $this->content,
     'difficulties' => $this->difficulty,
     'color' => $this->color,
     'periodicity' => $this->periodicity,
     'complete' => $this->complete,
+    'ID_User' => $_SESSION['ID']
     ));
-    echo '<div class="error-task">' ,'<p>Votre tâche à été ajouté !<p/>' ,'</div>';
+    header('Location: main.php');
+    exit;
     } catch (\PDOException $e) {
         echo "Connection failed: " . $e->getMessage();
     }

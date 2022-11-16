@@ -1,36 +1,212 @@
-.task{
+body {
+    margin: 0;
+}
+
+html {
+    min-width: 860px;
+}
+
+.task {
     background-color: #ffffff;
     border: 3px solid #e3e3e3;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
     padding: 3px;
-    width: 20rem;
+    width: 90%;
 }
-.taskName{
+
+.taskName {
     align-items: center;
     text-align: center;
 }
-.taskDifficulty{
+
+.taskDifficulty {
     align-items: right;
     text-align: right;
 }
 
-.taskGroupe{
+.taskGroupe {
     display: flex;
     flex-direction: column;
-    width: 22rem;
+    width: 30%;
     background-color: #e3e3e3;
-    border-radius: 1rem;
+    border-radius: 10px;
     margin: 15px;
     align-items: center;
+    height: calc(100vh - 5rem - 30px);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-.contant{
+.contant {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5rem;
 }
 
 h1 {
     text-align: center;
+}
+
+.score {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+
+}
+
+.scoreTotal {
+    font-size: larger;
+}
+
+hr {
+    width: 90%;
+}
+
+.showScore {
+    line-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    margin: 0;
+    background-color: #c300ff;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#logOut button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    height: calc(5rem - 30px);
+    width: calc(7rem - 30px);
+    border-radius: 50%;
+    background-color: #f8e2ff;
+    border-width: 1px;
+    font-size: large;
+    z-index: 10;
+    -webkit-box-shadow: 2px 2px 0px 2px #000000; 
+    box-shadow: 2px 2px 0px 2px #000000;
+}
+
+#logOut button:hover {
+    background-color: #efbcff;
+    -webkit-box-shadow: 1px 1px 0px 2px #000000; 
+    box-shadow: 1px 1px 0px 2px #000000;
+    margin-top: 1px;
+    margin-right: -1px;
+}
+
+#addTask button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    height: calc(5rem - 30px);
+    width: calc(8rem - 30px);
+    border-radius: calc((5rem - 30px) / 2);
+    background-color: #f8e2ff;
+    border-width: 1px;
+    font-size: large;
+    z-index: 10;
+    -webkit-box-shadow: 2px 2px 0px 2px #000000; 
+    box-shadow: 2px 2px 0px 2px #000000;
+}
+
+#addTask button:hover {
+    background-color: #efbcff;
+    -webkit-box-shadow: 1px 1px 0px 2px #000000; 
+    box-shadow: 1px 1px 0px 2px #000000;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+
+#logo {
+    position: fixed;
+    top: 15px;
+    left: 0;
+    font-size: large;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#logo img {
+    width: 50px;
+    height: 68px;
+    margin-top: -20px;
+}
+
+#logo h1 {
+    margin-top: 0;
+}
+
+.invite #popup{
+    display: none;
+}
+
+.invite:hover #popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.invite:hover #popup form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.invite{
+    position: fixed;
+    right: 7rem;
+    width: 13rem;
+    padding-bottom: 10px;
+    border: black solid 1px;
+    border-radius: calc((5rem - 30px) / 2);
+    background-color: #f8e2ff;
+    height: 3em;
+    margin-top: 10px;
+}
+
+.invite #show {
+    height: calc(5rem - 30px);
+    border-width: 1px;
+    font-size: large;
+    background-color: #f8e2ff;
+    border-radius: calc((5rem - 30px) / 2);
+    margin-top: -20px;
+    width: 100%;
+}
+
+.invite:hover{
+    background-color: #f8e2ff;
+    border-radius: calc((5rem - 30px) / 2);
+    height: auto;
 }

@@ -1,104 +1,163 @@
 <?php
-    require 'Config.php';
-    session_start();
-    if (empty($_SESSION['ID'])) {
-        header('Location: log.php');
-        exit;
-    }else{
-        $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-        $data = $pdo->query('SELECT ID_Group FROM user WHERE ID = ' . $_SESSION['ID'])->fetchAll();
-        if (!$data[0]['ID_Group']) {
-            header('Location: Group.php');
-            exit;
-        }
-    }
-?>
+require 'Config.php';
+session_start();
+class displayData
+{
+    private $pdo;
 
-<html>
-
-<head>
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="./css/main.css" />
-    <meta charset="utf-8" />
-    <?php
-    class displayData
+    public function __construct()
     {
-        public function displayTask()
-        {
-            $host = 'localhost';
-            $db   = 'habitenforcer';
-            $user = 'Esteban';
-            $pass = 'Ynov';
-            $dsn = "mysql:host=$host;dbname=$db";
-            try {
-                $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-                echo "<div class=\"contant\"><div class=\"taskGroupe jour\"><h1>Journalière</h1>";
-                $data = $pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière'")->fetchAll();
-                foreach ($data as $row) {
-                    echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
-                    echo "<p class=\"taskName\" >$row[Name]</p>";
-                    switch ($row["Difficulties"]) {
-                        case 1:
-                            echo "<p class=\"taskDifficulty\" >Kitty</p>";
-                            break;
-                        case 2:
-                            echo "<p class=\"taskDifficulty\" >Kat</p>";
-                            break;
-                        case 3:
-                            echo "<p class=\"taskDifficulty\" >Kitue</p>";
-                            break;
-                    }
-                    echo "</div>";
-                }
-                echo "</div><div class=\"taskGroupe hebdo\"><h1>Hebdomadaire</h1>";
-                $data = $pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Hebdomadaire'")->fetchAll();
-                foreach ($data as $row) {
-                    echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
-                    echo "<p class=\"taskName\" >$row[Name]</p>";
-                    switch ($row["Difficulties"]) {
-                        case 1:
-                            echo "<p class=\"taskDifficulty\" >Kitty</p>";
-                            break;
-                        case 2:
-                            echo "<p class=\"taskDifficulty\" >Kat</p>";
-                            break;
-                        case 3:
-                            echo "<p class=\"taskDifficulty\" >Kitue</p>";
-                            break;
-                    }
-                    echo "</div>";
-                }
-                echo "</div></div>";
-            } catch (\PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+        $this->pdo = new PDO(Config::$url, Config::$user, Config::$password);
+    }
+
+
+    public function LogVerif()
+    {
+        if (empty($_SESSION['ID'])) {
+            header('Location: log.php');
+            exit;
+        } else {
+            $data = $this->pdo->query('SELECT ID_Group FROM user WHERE ID = ' . $_SESSION['ID'])->fetchAll();
+            if (!$data[0]['ID_Group']) {
+                header('Location: Group.php');
+                exit;
             }
         }
     }
-    /*class checkTask{
-    function __construct($complete) {
-        $this->complete = $complete;
-    }
-    public function checkTask(){
-        $host = 'localhost';
-        $db   = 'habitenforcer';
-        $user = 'Esteban';
-        $pass = 'Ynov';
-        $dsn = "mysql:host=$host;dbname=$db";
+    public function displayTask()
+    {
         try {
-            $pdo = new \PDO($dsn, $user, $pass);
-            $request = $pdo -> prepare('INSERT INTO `task` (complete) VALUES (:complete)');
-           $request->execute(array(
-           'complete' => $this->complete,
-           ));
-           } catch (\PDOException $e) {
-               echo "Connection failed: " . $e->getMessage();
-           }
+            echo "<div class=\"contant\">";
+            $this->displayJour();
+            $this->displayHebdo();
+            $this->displayScore();
+            echo "</div>";
+        } catch (\PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
-}*/
-    //$checkTask = new checkTask($_POST[""])
-    $displayInfo = new displayData();
-    $displayInfo->displayTask();
-    ?>
-    </body>
+
+    private function displayJour()
+    {
+        echo "<div class=\"taskGroupe jour\"><h1>Journalière</h1>";
+        $data = $this->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
+        foreach ($data as $row) {
+            echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
+            echo "<p class=\"taskName\" >$row[Name]</p>";
+            switch ($row["Difficulties"]) {
+                case 1:
+                    echo "<p class=\"taskDifficulty\" >Kitty</p>";
+                    break;
+                case 2:
+                    echo "<p class=\"taskDifficulty\" >Kat</p>";
+                    break;
+                case 3:
+                    echo "<p class=\"taskDifficulty\" >Kitue</p>";
+                    break;
+            }
+            echo "</div>";
+        }
+        echo "</div>";
+    }
+
+    private function displayHebdo()
+    {
+        echo "<div class=\"taskGroupe hebdo\"><h1>Hebdomadaire</h1>";
+        $data = $this->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Hebdomadaire' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
+        foreach ($data as $row) {
+            echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
+            echo "<p class=\"taskName\" >$row[Name]</p>";
+            switch ($row["Difficulties"]) {
+                case 1:
+                    echo "<p class=\"taskDifficulty\" >Kitty</p>";
+                    break;
+                case 2:
+                    echo "<p class=\"taskDifficulty\" >Kat</p>";
+                    break;
+                case 3:
+                    echo "<p class=\"taskDifficulty\" >Kitue</p>";
+                    break;
+            }
+            echo "</div>";
+        }
+        echo "</div>";
+    }
+
+    private function displayScore()
+    {
+        echo "<div class=\"taskGroupe scoreGroup\"><h1>Score</h1><div class=\"showScore\">";
+        $data = $this->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->pdo->query("SELECT Pseudo,Score FROM `user` WHERE `ID_Group` = " . $data[0]['ID_Group'])->fetchAll();
+        $scoreTotal = 0;
+        foreach ($data as $row) {
+            $scoreTotal += $row['Score'];
+        }
+        echo "<p class=\"scoreTotal\" >Total : $scoreTotal</p>";
+        foreach ($data as $row) {
+            echo "<hr>";
+            if ($row["Score"] > 0) {
+                echo "<div class=\"score\" ><p>$row[Pseudo] : </p><p style=\"color:#17D800;font-weight: 700;\">$row[Score]</p></div>";
+            } else if ($row["Score"] < 0) {
+                echo "<div class=\"score\" ><p>$row[Pseudo] : </p><p style=\"color:#FF0000;font-weight: 700;\">$row[Score]</p></div>";
+            } else {
+                echo "<div class=\"score\" ><p>$row[Pseudo] : $row[Score]</p></div>";
+            }
+        }
+        echo "</div>";
+    }
+
+    public function GetGroupName(){
+        $data = $this->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->pdo->query("SELECT Name FROM `group` WHERE `ID` = " . $data[0]['ID_Group'])->fetchAll();
+        return $data[0]['Name'];
+    }
+}
+$displayData = new displayData();
+$displayData->LogVerif();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div id="logOut">
+            <form action="logOut.php" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+        <div id="addTask">
+            <form action="task.php" method="post">
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+        <div id="logo">
+            <img src="./img/Kittytude_logo.png">
+            <h1><?php echo $displayData->GetGroupName(); ?></h1>
+            <img src="./img/Kittytude_logo.png">
+        </div>
+        <div class="invite">
+            <div id="show">
+                <h1>Invité</h1>
+            </div>
+            <div id="popup">
+                <form action="invite.php" method="post">
+                    <label for="email">Email de la personne a invité</label><br>
+                    <input type="text" name="email" id="email" placeholder="exemple@e.mail"><br>
+                    <button type="submit">Validé</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <?php $displayData->displayTask(); ?>
+</body>
 
 </html>
