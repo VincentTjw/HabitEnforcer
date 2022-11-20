@@ -41,6 +41,17 @@ body{
     float : right;
 }
 
+.cardInvit{
+    margin-top: 5rem;
+    max-width: 250px;
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: black;
+    border-radius: 1rem;
+    float : flex;  
+}
+
 @media screen and (max-width: 765px) {
     .cardLeft {
         margin-top: calc(5rem + 325px);

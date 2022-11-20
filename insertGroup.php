@@ -39,8 +39,9 @@ catch (PDOException $e){
     echo "Erreur :" . $e->getMessage();
 
 }
-header('Location: Group.php');
-exit;
+
+
 
 header('Location: ./main.php');
+exit;
 ?>

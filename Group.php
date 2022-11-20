@@ -44,27 +44,64 @@
                     <label for="Name">Quel est le nom du groupe que vous voulez rejoindre ?<br></label>
                     <input type="text" name='Name'><br>
                     <label for="text" name='Mdp'>Quel est le mot de passe ?</label><br>
-                    <input type="password" name='Mdp'>
-                </div>
+                    <input type="password" name='Mdp'> <br>
+           
+               
                 <input type="submit" value='OK'>
-            </form>
+            
         </div>
-        <div class='cardRight'>
-            <h1>Inviter un membre !</h1>
-            <form action="invit.php" method="post">
-                <div class='invit-group'>
-                    <label for="Mail">Qui souhaitez vous inviter ?<br> (Ecrivez un ID) <br> </label>
+        <div class='cardInvit'>
+       <h1> Invitation !</h1>
+            <?php
+             require 'Config.php';
+             $pdo = new PDO(Config::$url, Config::$user, Config::$password);
+             $request = $pdo -> prepare('SELECT Group_Invitation FROM `user` WHERE ID = :id');
+             $request -> execute(array('id' => $_SESSION['ID']));
+             $seq = $request -> fetch();
+                if ($seq['Group_Invitation'] != ""){
+                    echo "Vous avez une invitation ! <br>";
+                    
+                }
+                else{
+                    echo "Vous n'avez pas d'invitation";
+                }
+          
 
-                    <input type="text" name='Invit'><br>
-                  
-                </div>
-                <input type="submit" value='OK'>
-            </form>
-        </div>
-        
+             $list = explode(" ", $seq['Group_Invitation']);
+             for ($i = 0; $i < count($list); $i++) { ?>
+                <tr>
+                    <td></td>
+                    <td>
+                <?php
+                 $group = $pdo -> prepare('SELECT Name FROM `group` WHERE ID = :id');
+                    $group -> execute(array('id' => $list[$i]));
+                    $name = $group -> fetch();
+                    echo $name['Name'];
+                 
+                 ?>
+                 </td>
+                 <td>  
+                    <form action="invitValid.php" method = "POST">
+               
+                    <button type="submit" value="<?php echo $list[$i]; ?>" name = "valid"> Valider </button>
+                    </form>
+                    
+                 </td>
+                 <td>
+                 <form action="invitRefus.php" method = "POST">
+               
+               <button type="submit" value="<?php echo $list[$i]; ?>" name = "refus"> Refuser </button>
+               </form>
+                    <?php
+                     "<br>";
+                    ?>
+                 </td>
+                 </tr>
+                 <?php
+             }
+            ?>
 
-
-
+</div>
     </div>
 </body>
 
