@@ -45,7 +45,7 @@
                     }
                         ?>
                 </div>
-                <input type="submit" value='OK'>
+                <input  class = 'pushButton' type="submit" value='OK'>
             </form>
         </div>
         <div class='cardRight'>
@@ -58,7 +58,7 @@
                     <input type="password" name='Mdp'> <br>
 
 
-                    <input type="submit" value='OK'>
+                    <input class = 'pushButton' type="submit" value='OK'>
             </form>
         </div>
     </div>
@@ -86,7 +86,7 @@
             <?php
                 for ($i = 0; $i < count($list); $i++) { 
                     ?>
-            <div>
+            <div class = 'firstColl'>
 
                 <?php
                  
@@ -107,7 +107,7 @@
             ?>
             <div>
                 <form action="invitValid.php" method="POST">
-                    <button type="submit" value="<?php echo $list[$i]; ?>" name="valid"> Valider </button>
+                    <button type="submit"  class = 'validButton' value="<?php echo $list[$i]; ?>" name="valid"> Valider </button>
                 </form>
             </div>
             <?php } ?>
@@ -119,7 +119,7 @@
             <div>
                 <form action="invitRefus.php" method="POST">
 
-                    <button type="submit" value="<?php echo $list[$i]; ?>" name="refus"> Refuser </button>
+                    <button type="submit" class = 'refusButton' value="<?php echo $list[$i]; ?>" name="refus"> Refuser </button>
                 </form>
             </div>
             <?php } ?>
