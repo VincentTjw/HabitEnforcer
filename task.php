@@ -5,6 +5,11 @@
         <meta charset="utf-8" />
     </head>
     <body>
+    <form action="main.php" method="post">
+        <div id="home">
+        <button type="submit">Home</button>
+        </div>
+</form>
         <div id="task-form">
   <h2 class="header">Crée une nouvelle tâche </h2>
   <div>
@@ -38,33 +43,31 @@ class Task
     public $color;
     public $periodicity;
     public $complete;
+    public $timeValidation;
 
-    function __construct($content,$difficulty,$color,$periodicity,$complete) {
+    function __construct($content,$difficulty,$color,$periodicity,$complete,$timeValidation) {
         $this->content = $content;
         $this->difficulty = $difficulty;
         $this->color = $color;
         $this->periodicity = $periodicity;
         $this->complete = $complete;
+        $this->timeValidation = $timeValidation; 
     }
     public function createTask() {
-    $host = 'localhost';
-    $db   = 'habitenforcer';
-    $user = 'Esteban';
-    $pass = 'Ynov';
-    $dsn = "mysql:host=$host;dbname=$db";
          if($this->content == "" ||  $this->difficulty == "" || $this->color == "" || $this->periodicity == "" ){
             echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
     try {
         require 'Config.php';
      $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete) VALUES (:name,:difficulties,:color,:periodicity,:complete)');
+     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete,timeValidation) VALUES (:name,:difficulties,:color,:periodicity,:complete,:timeValidation)');
     $request->execute(array(
     'name' => $this->content,
     'difficulties' => $this->difficulty,
     'color' => $this->color,
     'periodicity' => $this->periodicity,
     'complete' => $this->complete,
+    'timeValidation' => $this->timeValidation,
     ));
     echo '<div class="error-task">' ,'<p>Votre tâche à été ajouté !<p/>' ,'</div>';
     } catch (\PDOException $e) {
@@ -73,7 +76,7 @@ class Task
     }
 }
 }
-$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"],0);
+$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"],0,date("Y/m/d"));
 $newTask->createTask();
 ?>
 </body>
