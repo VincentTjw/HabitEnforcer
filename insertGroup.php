@@ -14,7 +14,9 @@ if ($name != NULL){
    $result = $verify -> rowCount();
    var_dump($result);
     if ($result ==1) {
-        echo 'Nom du groupe déjà utilisé, veuillez réessayer';
+        $same = 1;
+        header ('Location: ./Group.php?same='.$same);
+        exit;
         ?>
 <input type="submit" value='Retour'>
 <?php

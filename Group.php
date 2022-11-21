@@ -39,7 +39,11 @@
                     if (!empty($_GET['mdpF'])) {
                         ?> <p>Les mots de passe ne correspondent pas</p> <?php
                         
-                    } ?>
+                    } 
+                    if (!empty($_GET['same'])) {
+                        ?> <p>Le nom du groupe est déjà utilisé</p> <?php 
+                    }
+                        ?>
                 </div>
                 <input type="submit" value='OK'>
             </form>
@@ -73,6 +77,7 @@
           
                 if ($seq['Group_Invitation']){
                     $list = explode(" ", $seq['Group_Invitation']);
+                   
                 }else{
                     $list = [];
                 }
@@ -84,11 +89,13 @@
             <div>
 
                 <?php
+                 
                  $group = $pdo -> prepare('SELECT Name FROM `group` WHERE ID = :id');
                     $group -> execute(array('id' => $list[$i]));
                     $name = $group -> fetch();
+                   
                     echo $name['Name'];
-                    
+                
                         
                         ?>
             </div>
