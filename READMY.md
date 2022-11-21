@@ -83,6 +83,14 @@ https://www.mamp.info/en/downloads/
    Put the database in :
    C:\MAMP\db\mysql
    ```
+4. 
+   ```
+    Open Config.php in the project and change the database name , user and password
+  ```
+5. 
+   ```
+    Open MAMP and start the server
+  ```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
