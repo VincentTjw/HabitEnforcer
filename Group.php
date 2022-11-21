@@ -25,6 +25,7 @@
         </div>
         <div class='cardLeft'>
             <h1>Créer un groupe !</h1>
+
             <form action="insertGroup.php" method="post">
                 <div class='create-group'>
                     <label for="Name">Name</label><br>
@@ -33,6 +34,12 @@
                     <input type="password" name='mdp' required> <br>
                     <label for="mdpVerify">Confirmer le mot de passe</label> <br>
                     <input type="password" name='mdpverif' required>
+                    <?php 
+
+                    if (!empty($_GET['mdpF'])) {
+                        ?> <p>Les mots de passe ne correspondent pas</p> <?php
+                        
+                    } ?>
                 </div>
                 <input type="submit" value='OK'>
             </form>
@@ -45,63 +52,73 @@
                     <input type="text" name='Name'><br>
                     <label for="text" name='Mdp'>Quel est le mot de passe ?</label><br>
                     <input type="password" name='Mdp'> <br>
-           
-               
-                <input type="submit" value='OK'>
-            
+
+
+                    <input type="submit" value='OK'>
+            </form>
         </div>
-        <div class='cardInvit'>
-       <h1> Invitation !</h1>
-            <?php
+    </div>
+    <div class='cardInvit'>
+        <h1> Invitation !</h1>
+        <div class="Invitation">
+        <?php
              require 'Config.php';
              $pdo = new PDO(Config::$url, Config::$user, Config::$password);
              $request = $pdo -> prepare('SELECT Group_Invitation FROM `user` WHERE ID = :id');
              $request -> execute(array('id' => $_SESSION['ID']));
              $seq = $request -> fetch();
-                if ($seq['Group_Invitation'] != ""){
-                    echo "Vous avez une invitation ! <br>";
-                    
-                }
-                else{
+                if ($seq['Group_Invitation'] == ""){
                     echo "Vous n'avez pas d'invitation";
                 }
           
+                if ($seq['Group_Invitation']){
+                    $list = explode(" ", $seq['Group_Invitation']);
+                }else{
+                    $list = [];
+                }
+             ?>
+        <div class = "invColl">
+            <?php
+                for ($i = 0; $i < count($list); $i++) { 
+                    ?>
+            <div>
 
-             $list = explode(" ", $seq['Group_Invitation']);
-             for ($i = 0; $i < count($list); $i++) { ?>
-                <tr>
-                    <td></td>
-                    <td>
                 <?php
                  $group = $pdo -> prepare('SELECT Name FROM `group` WHERE ID = :id');
                     $group -> execute(array('id' => $list[$i]));
                     $name = $group -> fetch();
                     echo $name['Name'];
-                 
-                 ?>
-                 </td>
-                 <td>  
-                    <form action="invitValid.php" method = "POST">
-               
-                    <button type="submit" value="<?php echo $list[$i]; ?>" name = "valid"> Valider </button>
-                    </form>
                     
-                 </td>
-                 <td>
-                 <form action="invitRefus.php" method = "POST">
-               
-               <button type="submit" value="<?php echo $list[$i]; ?>" name = "refus"> Refuser </button>
-               </form>
-                    <?php
-                     "<br>";
-                    ?>
-                 </td>
-                 </tr>
-                 <?php
-             }
+                        
+                        ?>
+            </div>
+            <?php } ?>
+        </div>
+        <div class = "invColl">
+            <?php
+                for ($i = 0; $i < count($list); $i++) { 
             ?>
+            <div>
+                <form action="invitValid.php" method="POST">
+                    <button type="submit" value="<?php echo $list[$i]; ?>" name="valid"> Valider </button>
+                </form>
+            </div>
+            <?php } ?>
+        </div>
+        <div class = "invColl">
+            <?php
+                for ($i = 0; $i < count($list); $i++) {
+            ?>
+            <div>
+                <form action="invitRefus.php" method="POST">
 
-</div>
+                    <button type="submit" value="<?php echo $list[$i]; ?>" name="refus"> Refuser </button>
+                </form>
+            </div>
+            <?php } ?>
+        </div>
+
+    </div>
     </div>
 </body>
 

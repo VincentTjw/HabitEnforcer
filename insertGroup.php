@@ -1,7 +1,7 @@
 <?php
+$faux =0;
 
-
-$name = $_POST["Name"];
+$name = strtoupper($_POST["Name"]);
 $mdp = $_POST["mdp"];
 $mdpverif = $_POST["mdpverif"];
 try{
@@ -16,8 +16,8 @@ if ($name != NULL){
     if ($result ==1) {
         echo 'Nom du groupe déjà utilisé, veuillez réessayer';
         ?>
-        <input type="submit" value ='Retour'>
-        <?php
+<input type="submit" value='Retour'>
+<?php
     }
 else {
     if($mdp == $mdpverif){ 
@@ -28,9 +28,13 @@ else {
      'name' => $name,
      'mdp' => $mdp
 ));
+header('Location: ./main.php');
+exit;
     }
     else{
-        echo 'Les mots de passe ne correspondent pas';
+        $faux = 1;
+        header ('Location: ./Group.php?mdpF='.$faux);
+        exit;
 
     }
 }   }
@@ -42,6 +46,5 @@ catch (PDOException $e){
 
 
 
-header('Location: ./main.php');
-exit;
+
 ?>
