@@ -4,14 +4,29 @@ class Leave{
     private $bdd = null;
     private $user = null;
 
-    public function __construct(){
+    public static function GameOver(){
+        echo " GAME OVER ";
+        session_start();
+        require_once 'BDD_Manager.php';
+        $bdd = new BDD_Manager();
+        require_once 'BDD_Manager.php';
+        $ID_Group = $bdd->getUserIDGroupWhereId($_SESSION['ID'])[0];
+        $allUser = $bdd->getUserFromGroup($ID_Group);
+        echo $allUser;
+        foreach ($allUser as $user) {
+            echo $user;
+            new Leave($user['ID']);
+        }
+        $bdd->DelGroup($ID_Group);
+        
+    }
+
+    public function __construct(String $ID){
         session_start();
         require_once 'BDD_Manager.php';
         $this->bdd = new BDD_Manager();
-        $this->user = $_SESSION['ID'];
-        $this->leave();
-        $this->taskClear();
-        $this->restScore();
+        $this->user = $ID;
+        $this->leaveGroup();
     }
 
     private function leave(){
@@ -34,8 +49,14 @@ class Leave{
             'id' => $this->user
         ));
     }
+
+    private function leaveGroup(){
+        $this->leave();
+        $this->restScore();
+        $this->taskClear();
+    }
 }
-new Leave();
-header('Location: main.php');
-exit;
+// new Leave($_SESSION['ID']);
+// header('Location: main.php');
+// exit;
 ?>

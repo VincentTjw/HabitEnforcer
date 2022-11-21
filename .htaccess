@@ -1,0 +1,2 @@
+ErrorDocument 404 "/HabitEnforcer/main.php"
+ErrorDocument 500 "/HabitEnforcer/error_500.html"

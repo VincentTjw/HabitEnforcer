@@ -17,5 +17,31 @@ class BDD_Manager
         ));
         return $req->fetch();
     }
+
+    public function getUserIDGroupWhereId($id)
+    {
+        $req = $this->pdo->prepare('SELECT `ID_Group` FROM `user` WHERE `ID` = :id');
+        $req->execute(array(
+            'id' => $id,
+        ));
+        return $req->fetch();
+    }
+
+    public function getUserFromGroup($id)
+    {
+        $req = $this->pdo->prepare('SELECT * FROM `user` WHERE ID_Group = :id');
+        $req->execute(array(
+            'id' => $id
+        ));
+        return $req->fetchAll();
+    }
+
+    public function DelGroup($id)
+    {
+        $req = $this->pdo->prepare('DELETE FROM `group` WHERE `group`.`ID` = :id');
+        $req->execute(array(
+            'id' => $id
+        ));
+    }
 }
 ?>

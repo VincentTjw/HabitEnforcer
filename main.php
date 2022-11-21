@@ -99,6 +99,11 @@ class displayData
         foreach ($data as $row) {
             $scoreTotal += $row['Score'];
         }
+        if ($scoreTotal <= 0) {
+            echo "GAME OVER";
+            require_once 'leave.php';
+            Leave::GameOver();
+        }
         usort($data, array($this, "ScoreSort"));
         echo "<p class=\"scoreTotal\" >Total : $scoreTotal</p>";
         foreach ($data as $row) {
@@ -120,6 +125,7 @@ class displayData
         $data = $this->bdd->pdo->query("SELECT Name FROM `group` WHERE `ID` = " . $data[0]['ID_Group'])->fetchAll();
         return $data[0]['Name'];
     }
+
 }
 $displayData = new displayData();
 $displayData->LogVerif();
