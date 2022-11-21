@@ -42,8 +42,17 @@ body{
     float : right;
 }
 
-.create-group{
-    
+.cardInvit{
+
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: black;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 765px) {
@@ -59,4 +68,66 @@ body{
     .cardRight {
         margin-top: 5rem;
     }
+}
+
+.invit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.invColl{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+
+}
+.Invitation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.refusButton {
+    background-color: rgb(223, 50, 203);
+    color: white;
+    border: none;
+    border-radius: 1rem;
+
+    cursor: pointer;
+
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.validButton {
+    background-color: rgb(45, 196, 130);
+    color: white;
+    border: none;
+    border-radius: 1rem;
+
+    cursor: pointer;
+
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.pushButton {
+    background-color: rgb(144, 22, 22);
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
 }

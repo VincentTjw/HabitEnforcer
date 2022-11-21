@@ -48,11 +48,7 @@ class Task
         $this->complete = $complete;
     }
     public function createTask() {
-    $host = 'localhost';
-    $db   = 'habitenforcer';
-    $user = 'Esteban';
-    $pass = 'Ynov';
-    $dsn = "mysql:host=$host;dbname=$db";
+
          if($this->content == "" ||  $this->difficulty == "" || $this->color == "" || $this->periodicity == "" ){
             echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
