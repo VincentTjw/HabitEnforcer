@@ -31,7 +31,14 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This project involves setting up an habit tracker inspired by the Habitica site.
 
+Specifications:
+
+-Ability to create an account and log in
+-Be able to compose a group of friends according to their identifier
+-Add habits to follow (daily or weekly)
+-Checking or not if the habits will influence on a group score
 
 
 
@@ -68,11 +75,13 @@ https://www.mamp.info/en/downloads/
    ```
 2. 
    ```
-   
+   Put the files in :
+   C:\MAMP\htdocs\
    ```
 3. 
    ```
-   
+   Put the database in :
+   C:\MAMP\db\mysql
    ```
 
 
@@ -88,7 +97,8 @@ https://www.mamp.info/en/downloads/
 - [x] Task Creation 
 - [x] Group 
 - [x] Full Responsive Website
-- [ ] 
+- [x] TaskValidation
+- [x] Score Update
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -116,7 +126,8 @@ Project Link: [https://github.com/VincentTjw/HabitEnforcer](https://github.com/V
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-* []()
-* []()
+* [SQL Injection](https://www.php.net/manual/fr/security.database.sql-injection.php)
+* [HTML Injection](https://riptutorial.com/php/example/11883/cross-site-scripting--xss-)
+* [require PHP](https://www.php.net/manual/fr/function.require.php)
 
 <p align="right">(<a href="#top">back to top</a>)</p>

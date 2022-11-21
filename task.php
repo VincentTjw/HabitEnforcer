@@ -5,6 +5,11 @@
         <meta charset="utf-8" />
     </head>
     <body>
+    <form action="main.php" method="post">
+        <div id="home">
+        <button type="submit">Home</button>
+        </div>
+</form>
         <div id="task-form">
   <h2 class="header">Crée une nouvelle tâche </h2>
   <div>
@@ -39,30 +44,32 @@ class Task
     public $color;
     public $periodicity;
     public $complete;
+    public $timeValidation;
 
-    function __construct($content,$difficulty,$color,$periodicity,$complete) {
+    function __construct($content,$difficulty,$color,$periodicity,$complete,$timeValidation) {
         $this->content = $content;
         $this->difficulty = $difficulty;
         $this->color = $color;
         $this->periodicity = $periodicity;
         $this->complete = $complete;
+        $this->timeValidation = $timeValidation; 
     }
     public function createTask() {
-
          if($this->content == "" ||  $this->difficulty == "" || $this->color == "" || $this->periodicity == "" ){
             echo '<div class="error-task">' ,'<p>Merci de compléter tout les champs !<p/>' ,'</div>';
         }else{
     try {
         require 'Config.php';
      $pdo = new PDO(Config::$url, Config::$user, Config::$password);
-     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete,ID_User) VALUES (:name,:difficulties,:color,:periodicity,:complete,:ID_User)');
+     $request = $pdo -> prepare('INSERT INTO `task` (Name,Difficulties,Color,Periodicity,complete,ID_User,timeValidation) VALUES (:name,:difficulties,:color,:periodicity,:complete,:ID_User,:timeValidation)');
     $request->execute(array(
     'name' => $this->content,
     'difficulties' => $this->difficulty,
     'color' => $this->color,
     'periodicity' => $this->periodicity,
     'complete' => $this->complete,
-    'ID_User' => $_SESSION['ID']
+    'ID_User' => $_SESSION['ID'],
+    'timeValidation' => $this->timeValidation
     ));
     header('Location: main.php');
     exit;
@@ -72,7 +79,7 @@ class Task
     }
 }
 }
-$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"],0);
+$newTask = new Task($_POST["tache"],$_POST["difficultyTask"],$_POST["colorTask"],$_POST["periodicityTask"],0,date("Y/m/d"));
 $newTask->createTask();
 ?>
 </body>
