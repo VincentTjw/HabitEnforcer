@@ -1,15 +1,22 @@
 <?php
-require 'Config.php';
+require 'BDD_Manager.php';
 session_start();
 class displayData
 {
-    private $pdo;
+    private $bdd;
 
     public function __construct()
     {
-        $this->pdo = new PDO(Config::$url, Config::$user, Config::$password);
+        $this->bdd = new BDD_Manager();
     }
 
+    private function ScoreSort($a, $b)
+    {
+        if ($a['Score'] == $b['Score']) {
+            return 0;
+        }
+        return ($a['Score'] > $b['Score']) ? -1 : 1;
+    }
 
     public function LogVerif()
     {
@@ -17,7 +24,7 @@ class displayData
             header('Location: log.php');
             exit;
         } else {
-            $data = $this->pdo->query('SELECT ID_Group FROM user WHERE ID = ' . $_SESSION['ID'])->fetchAll();
+            $data = $this->bdd->pdo->query('SELECT ID_Group FROM user WHERE ID = ' . $_SESSION['ID'])->fetchAll();
             if (!$data[0]['ID_Group']) {
                 header('Location: Group.php');
                 exit;
@@ -40,7 +47,7 @@ class displayData
     private function displayJour()
     {
         echo "<div class=\"taskGroupe jour\"><h1>Journalière</h1>";
-        $data = $this->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->bdd->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Journalière' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
         foreach ($data as $row) {
             echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
             echo "<p class=\"taskName\" >$row[Name]</p>";
@@ -63,7 +70,7 @@ class displayData
     private function displayHebdo()
     {
         echo "<div class=\"taskGroupe hebdo\"><h1>Hebdomadaire</h1>";
-        $data = $this->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Hebdomadaire' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->bdd->pdo->query("SELECT * FROM `task` WHERE `Periodicity` =  'Hebdomadaire' AND `ID_User` = " . $_SESSION['ID'])->fetchAll();
         foreach ($data as $row) {
             echo "<div class=\"task\" style=\"border-color: $row[Color]\">";
             echo "<p class=\"taskName\" >$row[Name]</p>";
@@ -86,12 +93,13 @@ class displayData
     private function displayScore()
     {
         echo "<div class=\"taskGroupe scoreGroup\"><h1>Score</h1><div class=\"showScore\">";
-        $data = $this->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
-        $data = $this->pdo->query("SELECT Pseudo,Score FROM `user` WHERE `ID_Group` = " . $data[0]['ID_Group'])->fetchAll();
+        $data = $this->bdd->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->bdd->pdo->query("SELECT Pseudo,Score FROM `user` WHERE `ID_Group` = " . $data[0]['ID_Group'])->fetchAll();
         $scoreTotal = 0;
         foreach ($data as $row) {
             $scoreTotal += $row['Score'];
         }
+        usort($data, array($this, "ScoreSort"));
         echo "<p class=\"scoreTotal\" >Total : $scoreTotal</p>";
         foreach ($data as $row) {
             echo "<hr>";
@@ -106,9 +114,10 @@ class displayData
         echo "</div>";
     }
 
-    public function GetGroupName(){
-        $data = $this->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
-        $data = $this->pdo->query("SELECT Name FROM `group` WHERE `ID` = " . $data[0]['ID_Group'])->fetchAll();
+    public function GetGroupName()
+    {
+        $data = $this->bdd->pdo->query("SELECT ID_Group FROM `user` WHERE `ID` = " . $_SESSION['ID'])->fetchAll();
+        $data = $this->bdd->pdo->query("SELECT Name FROM `group` WHERE `ID` = " . $data[0]['ID_Group'])->fetchAll();
         return $data[0]['Name'];
     }
 }
@@ -124,10 +133,22 @@ $displayData->LogVerif();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="css/font.css">
     <title>Document</title>
 </head>
 
 <body>
+    <div id="fond">
+        <div class="pyro">
+            <div class="before"></div>
+            <div class="after"></div>
+        </div>
+        <div class="gOvale" id="ovale1"></div>
+        <div class="gOvale" id="ovale3"></div>
+        <div class="gOvale" id="ovale2"></div>
+        <div class="gOvale" id="ovale4"></div>
+        <div class="gOvale" id="ovale5"></div>
+    </div>
     <div class="header">
         <div id="logOut">
             <form action="logOut.php" method="post">
@@ -136,7 +157,12 @@ $displayData->LogVerif();
         </div>
         <div id="addTask">
             <form action="task.php" method="post">
-                <button type="submit">Add Task</button>
+                <button type="submit">Ajouter une tache</button>
+            </form>
+        </div>
+        <div id="leave">
+            <form action="leave.php" method="post">
+                <button type="submit">Quitté le groupe</button>
             </form>
         </div>
         <div id="logo">
