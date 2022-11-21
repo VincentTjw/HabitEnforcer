@@ -62,6 +62,13 @@ class displayData
                     echo "<p class=\"taskDifficulty\" >Kitue</p>";
                     break;
             }
+            if ($row['complete'] == 0) {
+                echo "<form action=\"taskValide.php\" method=\"post\">";
+                echo '<button class="taskButton" type="submit" name="ID" value="'.$row['ID'].'">Validé</button>';
+                echo "</form>";
+            } else {
+                echo '<button class="taskButton" type="submit" disabled>Terminé</button>';
+            }
             echo "</div>";
         }
         echo "</div>";
@@ -84,6 +91,13 @@ class displayData
                 case 3:
                     echo "<p class=\"taskDifficulty\" >Kitue</p>";
                     break;
+            }
+            if ($row['complete'] == 0) {
+                echo "<form action=\"taskValide.php\" method=\"post\">";
+                echo '<button class="taskButton" type="submit" name="ID" value="'.$row['ID'].'">Validé</button>';
+                echo "</form>";
+            } else {
+                echo '<button class="taskButton" type="submit" disabled>Terminé</button>';
             }
             echo "</div>";
         }
@@ -126,9 +140,31 @@ class displayData
         return $data[0]['Name'];
     }
 
+    public function ActualiseScore(){
+        session_start();
+        $users = $this->bdd->getUserFromGroup($this->bdd->getUserIDGroupWhereId($_SESSION['ID'])['ID_Group']);
+        foreach ($users as $user){
+            $tasks = $this->bdd->pdo->query("SELECT `ID` FROM `task` WHERE `ID_User` = " . $user['ID'])->fetchAll();
+            foreach ($tasks as $task){
+                require_once 'Task.php';
+                Task::checkTask($user['ID'],$task['ID']);
+            }
+        }
+    }
+
+    public function TaskButtonStop(){
+        session_start();
+        $DateLastTask = $this->bdd->getUserById($_SESSION['ID'])['DateLastTask'];
+        if ($DateLastTask == date("Y/m/d")){
+            echo "disabled";
+        }
+    }
+
 }
+
 $displayData = new displayData();
 $displayData->LogVerif();
+$displayData->ActualiseScore();
 ?>
 
 <!DOCTYPE html>
@@ -162,8 +198,8 @@ $displayData->LogVerif();
             </form>
         </div>
         <div id="addTask">
-            <form action="task.php" method="post">
-                <button type="submit">Ajouter une tache</button>
+            <form action="Addtask.php" method="post">
+                <button type="submit" <?php $displayData->TaskButtonStop(); ?>>Ajouter une tache</button>
             </form>
         </div>
         <div id="leave">
@@ -193,3 +229,4 @@ $displayData->LogVerif();
 </body>
 
 </html>
+<!-- DateLastTask -->
