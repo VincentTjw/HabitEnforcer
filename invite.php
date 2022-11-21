@@ -26,10 +26,11 @@ class invite
     private function InviteUser($email)
     {
         $data = $this->GetUserByEmail($email);
-        if ($data) {
-            $req = $this->pdo->prepare("UPDATE `user` SET `Group_Invitation` = :Group_Invitation WHERE `Email` = '$email'");
+        $idGroup = $this->GetGroupByID($_SESSION['ID']);
+        if ($data && $idGroup && !in_array($idGroup, explode(' ', $data['Group_Invitation']))) {
+                $req = $this->pdo->prepare("UPDATE `user` SET `Group_Invitation` = :Group_Invitation WHERE `Email` = '$email'");
             $req->execute(array(
-                'Group_Invitation' => $_SESSION['Group_Invitation'] . ',' . $this->GetGroupByID($_SESSION['ID'])
+                'Group_Invitation' => $data['Group_Invitation'] . ' ' . $idGroup
             ));
         }
     }

@@ -22,7 +22,6 @@ class Leave{
     }
 
     public function __construct(String $ID){
-        session_start();
         require_once 'BDD_Manager.php';
         $this->bdd = new BDD_Manager();
         $this->user = $ID;
@@ -56,7 +55,8 @@ class Leave{
         $this->taskClear();
     }
 }
-// new Leave($_SESSION['ID']);
-// header('Location: main.php');
-// exit;
+session_start();
+new Leave($_SESSION['ID']);
+header('Location: main.php');
+exit;
 ?>

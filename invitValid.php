@@ -15,7 +15,12 @@ try{
    
    if ($list != NULL){
     $list = array_diff($list, array($valid));
-    $new = implode(" ", $list);
+    if (count($list) == 0){
+        $new = NULL;
+    }
+    else{
+        $new = implode(" ", $list);
+    }
     $request = $pdo -> prepare("UPDATE `user` SET ID_Group = :ID_gr, Group_Invitation = :ID_inv WHERE ID = :id");
     $request->execute(array(
         'id' => $_SESSION['ID'],   
