@@ -86,11 +86,16 @@ https://www.mamp.info/en/downloads/
 4. 
    ```
     Open Config.php in the project and change the database name , user and password
-  ```
+   ```
 5. 
    ```
-    Open MAMP and start the server
-  ```
+    Open MAMP and start the server and the database
+   ```
+5. 
+   ```
+    Open your browser and go to :
+    http://localhost:8888/HabitEnforcer/log.php
+   ```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
